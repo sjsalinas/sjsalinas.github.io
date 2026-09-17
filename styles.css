@@ -1,14 +1,14 @@
 /* Sebastian Salinas research portfolio — Sasaki-inspired, neuro theme */
 :root {
-  --bg: #070b16;
-  --bg-soft: #0d1426;
-  --bg-card: #101a30;
-  --text: #eef1f6;
-  --muted: #a7b0c2;
-  --line: #223052;
-  --teal: #2dd4bf;
-  --violet: #8b5cf6;
-  --accent-grad: linear-gradient(100deg, var(--teal), var(--violet));
+  --bg: #0e0507;
+  --bg-soft: #170b0e;
+  --bg-card: #1e0e12;
+  --text: #f8f0ec;
+  --muted: #c4a9a4;
+  --line: #3a1c22;
+  --accent: #ff3b4e;
+  --ember: #ff8a3d;
+  --accent-grad: linear-gradient(100deg, var(--accent), var(--ember));
   --radius: 14px;
   --max: 1080px;
   --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -34,22 +34,22 @@ body::before {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(700px 420px at 12% -4%, rgba(139, 92, 246, 0.16), transparent 65%),
-    radial-gradient(640px 420px at 88% 6%, rgba(45, 212, 191, 0.12), transparent 65%);
+    radial-gradient(700px 420px at 12% -4%, rgba(255, 59, 78, 0.16), transparent 65%),
+    radial-gradient(640px 420px at 88% 6%, rgba(255, 138, 61, 0.12), transparent 65%);
 }
 
 h1, h2, h3 { line-height: 1.12; letter-spacing: -0.02em; }
 h2 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); margin: 0.4em 0 0.9em; }
 h3 { font-size: 1.2rem; margin: 1.6em 0 0.6em; }
 p { margin: 0 0 1em; }
-a { color: var(--teal); }
+a { color: var(--accent); }
 a:hover { color: #7df0e2; }
 code { font-size: 0.85em; }
 
 .skip-link {
   position: absolute;
   left: -999px;
-  background: var(--teal);
+  background: var(--accent);
   color: #04241f;
   padding: 8px 14px;
   border-radius: 8px;
@@ -120,7 +120,7 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
   letter-spacing: 0.18em;
   font-size: 0.78rem;
   font-weight: 800;
-  color: var(--teal);
+  color: var(--accent);
   margin: 0 0 10px;
 }
 .muted { color: var(--muted); }
@@ -155,7 +155,7 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
 .btn-primary { background: var(--accent-grad); color: #06121a; }
 .btn-primary:hover { color: #06121a; filter: brightness(1.1); }
 .btn-ghost { border: 1px solid var(--line); color: var(--text); }
-.btn-ghost:hover { border-color: var(--teal); color: var(--text); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--text); }
 
 /* ---------- about ---------- */
 .about-grid {
@@ -169,8 +169,8 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
   border-radius: var(--radius);
   border: 1px dashed var(--line);
   background:
-    radial-gradient(circle at 30% 25%, rgba(139, 92, 246, 0.35), transparent 55%),
-    radial-gradient(circle at 72% 70%, rgba(45, 212, 191, 0.3), transparent 55%),
+    radial-gradient(circle at 30% 25%, rgba(255, 59, 78, 0.35), transparent 55%),
+    radial-gradient(circle at 72% 70%, rgba(255, 138, 61, 0.3), transparent 55%),
     var(--bg-soft);
   display: flex;
   align-items: center;
@@ -207,7 +207,7 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
 .card-image { aspect-ratio: 16 / 8; border: none; border-radius: 0; border-bottom: 1px solid var(--line); }
 .card-body { padding: 26px 28px 30px; }
 .card.slim .card-body { padding: 22px 24px 26px; }
-.card-meta { color: var(--teal); font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 8px; }
+.card-meta { color: var(--accent); font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 8px; }
 .card h3 { margin-top: 0; font-size: 1.45rem; }
 .card.slim h3 { font-size: 1.15rem; }
 .card-body p:last-child { margin-bottom: 0; }
@@ -257,14 +257,14 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
   text-decoration: none;
   color: var(--text);
 }
-.contact-card:hover { border-color: var(--teal); color: var(--text); }
+.contact-card:hover { border-color: var(--accent); color: var(--text); }
 .contact-label {
   display: block;
   font-size: 0.78rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--teal);
+  color: var(--accent);
   margin-bottom: 6px;
 }
 .contact-value { overflow-wrap: anywhere; font-size: 0.95rem; }
@@ -279,11 +279,24 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
   font-size: 0.9rem;
 }
 
-/* ---------- reveal animation ---------- */
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.reveal.visible { opacity: 1; transform: none; }
+/* ---------- Lenis smooth scroll (recommended CSS) ---------- */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ---------- masked line reveals (hero) ---------- */
+.line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.line-inner { display: block; will-change: transform; }
+
+/* ---------- scroll parallax helpers ---------- */
+/* Images rest slightly zoomed so scroll-linked pan never exposes edges. */
+html.anim .card-image img, html.anim .photo-placeholder img { transform: scale(1.18); will-change: transform; }
+.card-image { overflow: hidden; }
+.site-header { transition: background 0.3s ease, border-color 0.3s ease; }
+.site-header.scrolled { background: rgba(14, 5, 7, 0.96); }
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
 }
 
