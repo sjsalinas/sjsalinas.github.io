@@ -27,15 +27,18 @@ body {
   line-height: 1.65;
 }
 
-/* faint neural-network backdrop */
-body::before {
+/* neural glow, scoped to the hero so it scrolls away instead of
+   repainting every frame (fixed full-page layers + blur = frozen tabs) */
+.hero { position: relative; isolation: isolate; }
+.hero::before {
   content: "";
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  inset: -60px 0 0;
+  z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(700px 420px at 12% -4%, rgba(255, 59, 78, 0.16), transparent 65%),
-    radial-gradient(640px 420px at 88% 6%, rgba(255, 138, 61, 0.12), transparent 65%);
+    radial-gradient(700px 420px at 12% 0%, rgba(255, 59, 78, 0.16), transparent 65%),
+    radial-gradient(640px 420px at 88% 10%, rgba(255, 138, 61, 0.12), transparent 65%);
 }
 
 h1, h2, h3 { line-height: 1.12; letter-spacing: -0.02em; }
@@ -62,8 +65,7 @@ code { font-size: 0.85em; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(7, 11, 22, 0.88);
-  backdrop-filter: blur(10px);
+  background: #0e0507;
   border-bottom: 1px solid var(--line);
 }
 .nav {
@@ -293,8 +295,7 @@ html.lenis, html.lenis body { height: auto; }
 /* Images rest slightly zoomed so scroll-linked pan never exposes edges. */
 html.anim .card-image img, html.anim .photo-placeholder img { transform: scale(1.18); will-change: transform; }
 .card-image { overflow: hidden; }
-.site-header { transition: background 0.3s ease, border-color 0.3s ease; }
-.site-header.scrolled { background: rgba(14, 5, 7, 0.96); }
+.site-header.scrolled { border-bottom-color: var(--accent); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

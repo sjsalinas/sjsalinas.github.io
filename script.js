@@ -31,15 +31,17 @@
 
   // ---- Smooth scroll (Lenis) ----
   if (hasLenis && !reduceMotion) {
-    lenis = new Lenis({ lerp: 0.1, duration: 1.15 });
-    if (hasGsap && window.ScrollTrigger) {
-      lenis.on("scroll", window.ScrollTrigger.update);
-      gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
-      gsap.ticker.lagSmoothing(0);
-    } else {
-      var rafLenis = function (time) { lenis.raf(time); requestAnimationFrame(rafLenis); };
-      requestAnimationFrame(rafLenis);
-    }
+    try {
+      lenis = new Lenis({ lerp: 0.1 });
+      if (hasGsap && window.ScrollTrigger) {
+        lenis.on("scroll", window.ScrollTrigger.update);
+        gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+      } else {
+        var rafLenis = function (time) { lenis.raf(time); requestAnimationFrame(rafLenis); };
+        requestAnimationFrame(rafLenis);
+      }
+    } catch (err) { lenis = null; }
   }
 
   // Anchor links: route through Lenis when active, else native jump.
@@ -82,8 +84,11 @@
   }
 
   // ---- Scroll-linked animation (GSAP + ScrollTrigger) ----
+  // Wrapped so any failure leaves a plain readable page, never a frozen one.
   if (hasGsap && window.ScrollTrigger && !reduceMotion) {
+    try {
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
     document.documentElement.classList.add("anim");
 
     // Hero entrance: masked lines rise in stagger.
@@ -94,10 +99,9 @@
       .from(".hero-actions", { y: 24, opacity: 0, duration: 0.8 }, 0.8)
       .from(".hero-note", { opacity: 0, duration: 0.8 }, 0.95);
 
-    // Hero drifts up and fades as you scroll away (Sasaki-style).
+    // Hero drifts up gently as you scroll away (transform-only: cheap).
     gsap.to(".hero-title", {
-      yPercent: -14,
-      opacity: 0.25,
+      yPercent: -8,
       ease: "none",
       scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
     });
@@ -146,8 +150,9 @@
       ScrollTrigger.refresh();
     };
     wireParallax();
-    // Re-wire if images arrive later (placeholder swap below).
-    new MutationObserver(wireParallax).observe(document.body, { childList: true, subtree: true });
+    // Images swap in below via probe onload, which refreshes ScrollTrigger itself.
+    window.__wireParallax = wireParallax;
+    } catch (err) { /* fall through to static content */ }
   }
 
   // Image placeholders: swap in real images once the files exist.
@@ -165,7 +170,7 @@
       slot.querySelectorAll(".placeholder-initials, .placeholder-label").forEach(function (n) {
         n.style.display = "none";
       });
-      if (window.ScrollTrigger) ScrollTrigger.refresh();
+      if (window.ScrollTrigger && window.__wireParallax) window.__wireParallax();
     };
     probe.src = src;
   });
