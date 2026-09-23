@@ -1,4 +1,4 @@
-# sjsalinas.github.io — research portfolio
+# sjsalinas.github.io - research portfolio
 
 Static portfolio site (plain HTML/CSS/JS, no build step) for Sebastian Salinas,
 PhD applicant in neurobiology. Red neuro theme, Sasaki-style editorial type.

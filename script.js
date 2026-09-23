@@ -1,4 +1,4 @@
-// Sebastian Salinas portfolio — Lenis smooth scroll + GSAP ScrollTrigger.
+// Sebastian Salinas portfolio - Lenis smooth scroll + GSAP ScrollTrigger.
 // Libraries load from CDN (see index.html). Everything below degrades
 // gracefully: no CDN, no JS, or reduced-motion all show plain content.
 (function () {
