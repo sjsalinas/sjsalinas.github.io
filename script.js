@@ -166,17 +166,6 @@
   window.addEventListener("scroll", onScrollProg, { passive: true });
   onScrollProg();
 
-  // Hero cursor glow (fine pointers only, no reduced motion).
-  var hero = document.querySelector(".hero");
-  var glow = document.getElementById("hero-glow");
-  if (hero && glow && window.matchMedia("(pointer: fine)").matches && !reduceMotion) {
-    hero.addEventListener("mousemove", function (e) {
-      var r = hero.getBoundingClientRect();
-      glow.style.left = (e.clientX - r.left) + "px";
-      glow.style.top = (e.clientY - r.top) + "px";
-    });
-  }
-
   // Animated stat counters (vanilla rAF; final values already in markup).
   var stats = document.querySelector(".stats");
   if (stats && "IntersectionObserver" in window) {
@@ -225,6 +214,23 @@
       });
     }, { threshold: 0.25 });
     ganttObs.observe(gantt);
+  }
+
+  // Email card: copy address on click (mail app still opens as usual).
+  var mailCard = document.querySelector('a[href^="mailto:"]');
+  if (mailCard && navigator.clipboard) {
+    mailCard.addEventListener("click", function () {
+      var addr = mailCard.getAttribute("href").replace("mailto:", "");
+      try {
+        navigator.clipboard.writeText(addr).catch(function () {});
+      } catch (err) { /* clipboard unavailable */ }
+      var val = mailCard.querySelector(".contact-value");
+      if (val && !val.dataset.orig) {
+        val.dataset.orig = val.textContent;
+        val.textContent = "Copied to clipboard";
+        setTimeout(function () { val.textContent = val.dataset.orig; }, 1600);
+      }
+    });
   }
 
   // Image placeholders: swap in real images once the files exist.
