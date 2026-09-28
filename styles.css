@@ -351,35 +351,48 @@ html.anim .card-image img, html.anim .photo-placeholder img { transform: scale(1
 }
 .stat-label { display: block; color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
 
-/* ---------- timeline ---------- */
-.timeline { list-style: none; margin: 6px 0 0; padding: 0; }
-.timeline li {
-  position: relative;
-  margin-left: 6px;
-  padding: 0 0 26px 34px;
-  border-left: 2px solid var(--line);
+/* ---------- gantt timeline ---------- */
+.gantt { margin: 10px 0 0; }
+.gantt-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 10px;
 }
-.timeline li:last-child { padding-bottom: 4px; }
-.timeline li::before {
-  content: "";
+.gantt-label { font-size: 0.85rem; font-weight: 700; color: var(--muted); text-align: right; }
+.gantt-track {
+  position: relative;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+.gantt-ticks { display: flex; background: none; border: none; height: auto; }
+.gantt-ticks span {
+  flex: 1;
+  font-size: 0.72rem;
+  color: var(--muted);
+  border-left: 1px solid var(--line);
+  padding-left: 6px;
+}
+.bar {
   position: absolute;
-  left: -7px;
   top: 5px;
+  bottom: 5px;
+  border-radius: 999px;
+  background: var(--accent-grad);
+}
+.ms {
+  position: absolute;
+  top: 50%;
   width: 12px;
   height: 12px;
+  margin: -6px 0 0 -6px;
   border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 4px rgba(255, 59, 78, 0.15);
+  background: var(--ember);
+  box-shadow: 0 0 0 4px rgba(255, 138, 61, 0.15);
 }
-.timeline time {
-  display: block;
-  color: var(--accent);
-  font-weight: 800;
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
-  margin-bottom: 2px;
-}
-.timeline p { margin: 0; font-size: 0.97rem; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 760px) {
@@ -404,4 +417,6 @@ html.anim .card-image img, html.anim .photo-placeholder img { transform: scale(1
   .nav-links.open { display: flex; }
   .nav-links a { display: block; padding: 14px 22px; }
   .qa > div { grid-template-columns: 1fr; gap: 2px; }
+  .gantt-row { grid-template-columns: 104px 1fr; gap: 8px; }
+  .gantt-label { font-size: 0.7rem; }
 }
