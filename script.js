@@ -155,6 +155,78 @@
     } catch (err) { /* fall through to static content */ }
   }
 
+  // Scroll progress bar.
+  var prog = document.getElementById("progress");
+  var onScrollProg = function () {
+    if (!prog) return;
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    prog.style.transform = "scaleX(" + (max > 0 ? window.scrollY / max : 0) + ")";
+  };
+  window.addEventListener("scroll", onScrollProg, { passive: true });
+  onScrollProg();
+
+  // Hero cursor glow (fine pointers only, no reduced motion).
+  var hero = document.querySelector(".hero");
+  var glow = document.getElementById("hero-glow");
+  if (hero && glow && window.matchMedia("(pointer: fine)").matches && !reduceMotion) {
+    hero.addEventListener("mousemove", function (e) {
+      var r = hero.getBoundingClientRect();
+      glow.style.left = (e.clientX - r.left) + "px";
+      glow.style.top = (e.clientY - r.top) + "px";
+    });
+  }
+
+  // Animated stat counters (vanilla rAF; final values already in markup).
+  var stats = document.querySelector(".stats");
+  if (stats && "IntersectionObserver" in window) {
+    var animated = false;
+    var runCounters = function () {
+      if (animated) return;
+      animated = true;
+      Array.prototype.slice.call(stats.querySelectorAll(".stat-num")).forEach(function (el) {
+        var raw = el.textContent.trim();
+        var m = raw.match(/^([\d.]+)([\s\S]*)$/);
+        if (!m) return;
+        var target = parseFloat(m[1]);
+        var suffix = m[2];
+        var decimals = (m[1].split(".")[1] || "").length;
+        if (reduceMotion) {
+          el.textContent = target.toFixed(decimals) + suffix;
+          return;
+        }
+        var start = null;
+        var dur = 1200;
+        var step = function (t) {
+          if (!start) start = t;
+          var p = Math.min((t - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = (target * eased).toFixed(decimals) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+    };
+    var statsObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { runCounters(); statsObs.disconnect(); }
+      });
+    }, { threshold: 0.3 });
+    statsObs.observe(stats);
+  }
+
+  // Timeline bars grow in on entry (JS opts in so no-JS shows the chart).
+  var gantt = document.querySelector(".gantt");
+  if (gantt && "IntersectionObserver" in window && !reduceMotion) {
+    gantt.classList.add("anim-bars");
+    var ganttObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { gantt.classList.add("grown"); ganttObs.disconnect(); }
+      });
+    }, { threshold: 0.25 });
+    ganttObs.observe(gantt);
+  }
+
   // Image placeholders: swap in real images once the files exist.
   // Drop assets/photo.jpg, assets/j20.jpg, assets/leishmania.jpg,
   // assets/nasa.jpg into the repo and they appear automatically.

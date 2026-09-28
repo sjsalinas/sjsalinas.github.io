@@ -60,6 +60,35 @@ code { font-size: 0.85em; }
 }
 .skip-link:focus { left: 12px; top: 12px; }
 
+/* ---------- scroll progress ---------- */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  z-index: 60;
+  background: var(--accent-grad);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+/* ---------- hero cursor glow ---------- */
+.hero-glow {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  left: 50%;
+  top: 30%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 59, 78, 0.13), transparent 65%);
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+.hero > *:not(.hero-glow) { position: relative; z-index: 1; }
+@media (pointer: coarse) { .hero-glow { display: none; } }
+
 /* ---------- header ---------- */
 .site-header {
   position: sticky;
@@ -248,7 +277,20 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
   border-top: 1px solid var(--line);
   font-size: 0.97rem;
 }
-.news-list time { color: var(--accent); font-weight: 800; font-size: 0.85rem; letter-spacing: 0.04em; }
+.news-list time {
+  justify-self: start;
+  align-self: start;
+  white-space: nowrap;
+  color: var(--text);
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
 
 /* ---------- technique tags ---------- */
 .tags { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 4px; }
@@ -382,6 +424,26 @@ html.anim .card-image img, html.anim .photo-placeholder img { transform: scale(1
   bottom: 5px;
   border-radius: 999px;
   background: var(--accent-grad);
+  transform-origin: left center;
+  transition: transform 1.1s cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+/* Bars start collapsed only when JS opts in, so no-JS still shows the chart. */
+.gantt.anim-bars .bar { transform: scaleX(0); }
+.gantt.anim-bars.grown .bar { transform: scaleX(1); }
+.gantt.anim-bars .gantt-row:nth-child(2) .bar { transition-delay: 0.05s; }
+.gantt.anim-bars .gantt-row:nth-child(3) .bar { transition-delay: 0.13s; }
+.gantt.anim-bars .gantt-row:nth-child(4) .bar { transition-delay: 0.21s; }
+.gantt.anim-bars .gantt-row:nth-child(5) .bar { transition-delay: 0.29s; }
+.gantt.anim-bars .gantt-row:nth-child(6) .bar { transition-delay: 0.37s; }
+.gantt.anim-bars .gantt-row:nth-child(7) .bar { transition-delay: 0.45s; }
+.gantt.anim-bars .gantt-row:nth-child(8) .bar { transition-delay: 0.53s; }
+.gantt.anim-bars .gantt-row:nth-child(9) .bar { transition-delay: 0.61s; }
+.gantt.anim-bars .gantt-row:nth-child(10) .bar { transition-delay: 0.69s; }
+.gantt.anim-bars .ms { opacity: 0; transition: opacity 0.5s ease 1.1s; }
+.gantt.anim-bars.grown .ms { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .gantt.anim-bars .bar { transform: none; transition: none; }
+  .gantt.anim-bars .ms { opacity: 1; transition: none; }
 }
 .ms {
   position: absolute;
