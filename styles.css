@@ -455,11 +455,6 @@ html.anim .card-image img, html.anim .photo-placeholder img { transform: scale(1
   background: var(--ember);
   box-shadow: 0 0 0 4px rgba(255, 138, 61, 0.15);
 }
-.ms-future {
-  background: transparent;
-  border: 2px solid var(--ember);
-  box-shadow: none;
-}
 
 /* ---------- responsive ---------- */
 @media (max-width: 760px) {
