@@ -155,54 +155,16 @@
     } catch (err) { /* fall through to static content */ }
   }
 
-  // Scroll progress bar.
-  var prog = document.getElementById("progress");
-  var onScrollProg = function () {
-    if (!prog) return;
+  // Scroll neuron: fills the side outline with page progress.
+  var neuron = document.getElementById("scroll-neuron");
+  var onScrollNeuron = function () {
+    if (!neuron) return;
     var h = document.documentElement;
     var max = h.scrollHeight - h.clientHeight;
-    prog.style.transform = "scaleX(" + (max > 0 ? window.scrollY / max : 0) + ")";
+    neuron.style.setProperty("--p", max > 0 ? (window.scrollY / max).toFixed(4) : 0);
   };
-  window.addEventListener("scroll", onScrollProg, { passive: true });
-  onScrollProg();
-
-  // Animated stat counters (vanilla rAF; final values already in markup).
-  var stats = document.querySelector(".stats");
-  if (stats && "IntersectionObserver" in window) {
-    var animated = false;
-    var runCounters = function () {
-      if (animated) return;
-      animated = true;
-      Array.prototype.slice.call(stats.querySelectorAll(".stat-num")).forEach(function (el) {
-        var raw = el.textContent.trim();
-        var m = raw.match(/^([\d.]+)([\s\S]*)$/);
-        if (!m) return;
-        var target = parseFloat(m[1]);
-        var suffix = m[2];
-        var decimals = (m[1].split(".")[1] || "").length;
-        if (reduceMotion) {
-          el.textContent = target.toFixed(decimals) + suffix;
-          return;
-        }
-        var start = null;
-        var dur = 1200;
-        var step = function (t) {
-          if (!start) start = t;
-          var p = Math.min((t - start) / dur, 1);
-          var eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = (target * eased).toFixed(decimals) + suffix;
-          if (p < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-      });
-    };
-    var statsObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { runCounters(); statsObs.disconnect(); }
-      });
-    }, { threshold: 0.3 });
-    statsObs.observe(stats);
-  }
+  window.addEventListener("scroll", onScrollNeuron, { passive: true });
+  onScrollNeuron();
 
   // Timeline bars grow in on entry (JS opts in so no-JS shows the chart).
   var gantt = document.querySelector(".gantt");

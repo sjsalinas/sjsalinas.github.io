@@ -17,7 +17,32 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="progress" id="progress" aria-hidden="true"></div>
+  <svg class="scroll-neuron" id="scroll-neuron" viewBox="0 0 120 240" aria-hidden="true">
+    <g class="np-track">
+      <circle cx="60" cy="100" r="13" pathLength="1"/>
+      <path d="M60 87 L42 58 L30 34" pathLength="1"/>
+      <path d="M60 87 L60 50 L60 26" pathLength="1"/>
+      <path d="M60 87 L78 58 L90 34" pathLength="1"/>
+      <path d="M48 66 L36 58" pathLength="1"/>
+      <path d="M72 66 L84 58" pathLength="1"/>
+      <path d="M60 113 L60 170" pathLength="1"/>
+      <path d="M60 170 L46 192 L40 210" pathLength="1"/>
+      <path d="M60 170 L60 196 L60 214" pathLength="1"/>
+      <path d="M60 170 L74 192 L80 210" pathLength="1"/>
+    </g>
+    <g class="np-draw">
+      <circle cx="60" cy="100" r="13" pathLength="1"/>
+      <path d="M60 87 L42 58 L30 34" pathLength="1"/>
+      <path d="M60 87 L60 50 L60 26" pathLength="1"/>
+      <path d="M60 87 L78 58 L90 34" pathLength="1"/>
+      <path d="M48 66 L36 58" pathLength="1"/>
+      <path d="M72 66 L84 58" pathLength="1"/>
+      <path d="M60 113 L60 170" pathLength="1"/>
+      <path d="M60 170 L46 192 L40 210" pathLength="1"/>
+      <path d="M60 170 L60 196 L60 214" pathLength="1"/>
+      <path d="M60 170 L74 192 L80 210" pathLength="1"/>
+    </g>
+  </svg>
   <a class="skip-link" href="#about">Skip to content</a>
 
   <header class="site-header" id="site-header">
@@ -156,12 +181,12 @@
       <p class="kicker">News</p>
       <h2>Recent updates.</h2>
       <ul class="news-list">
-        <li><time>Sept 2026</time>Started as a teaching assistant for master&rsquo;s-level confocal microscopy (GSBS, TTUHSC).</li>
-        <li><time>July 2026</time>Posted GP63 preprint on Leishmania defense against aerolysin; under review.</li>
-        <li><time>Jan 2026</time>Co-authored <em>Toxins</em> paper on <em>Leishmania</em> membrane resistance to cholesterol-dependent cytolysins.</li>
-        <li><time>Oct 2025</time>Presented J20 vitamin A findings at the Society for Neuroscience meeting.</li>
-        <li><time>June 2025</time>Joined the Lawrence Lab at TTUHSC.</li>
-        <li><time>May 2025</time>Named a Texas Tech Tech10 honoree.</li>
+        <li><time>Sept 2026</time><span>Started as a teaching assistant for master&rsquo;s-level confocal microscopy (GSBS, TTUHSC).</span></li>
+        <li><time>July 2026</time><span>Posted GP63 preprint on Leishmania defense against aerolysin; under review.</span></li>
+        <li><time>Jan 2026</time><span>Co-authored <em>Toxins</em> paper on <em>Leishmania</em> membrane resistance to cholesterol-dependent cytolysins.</span></li>
+        <li><time>Oct 2025</time><span>Presented J20 vitamin A findings at the Society for Neuroscience meeting.</span></li>
+        <li><time>June 2025</time><span>Joined the Lawrence Lab at TTUHSC.</span></li>
+        <li><time>May 2025</time><span>Named a Texas Tech Tech10 honoree.</span></li>
       </ul>
     </section>
 
@@ -182,7 +207,7 @@
               <div><dt>Question</dt><dd>Do vitamin A and HDAC inhibition, alone or combined, stall neurodegeneration in the J20 model?</dd></div>
               <div><dt>Methods</dt><dd>Dietary and pharmacological interventions with qRT-PCR, Western blot, histology, confocal microscopy, and behavior.</dd></div>
               <div><dt>Findings</dt><dd>ATRA and vorinostat show neuroprotective effects across physiology, excitability, behavior, and biochemistry; presented at SFN 2025.</dd></div>
-              <div><dt>Why it matters</dt><dd>Alzheimer&rsquo;s care leans on drugs that are expensive and start too late. Vitamin A is inexpensive and widely available, and vorinostat is already approved for other uses. Together, they point toward a cheap, early intervention that could slow decline before damage accumulates.</dd></div>
+              <div><dt>Why it matters</dt><dd>Alzheimer&rsquo;s care leans on drugs that are expensive and start too late. Vitamin A is inexpensive and widely available, and vorinostat is already approved for other uses. Together, they point towards an affordable, early intervention that could slow decline before damage accumulates.</dd></div>
             </dl>
           </div>
         </article>
@@ -198,7 +223,7 @@
               <div><dt>Question</dt><dd>How do membrane microdomains in <em>Leishmania major</em> shape susceptibility to pore-forming toxins?</dd></div>
               <div><dt>Methods</dt><dd>LC50 assays for streptolysin O, toxin binding assays, flow cytometry, fluorescence microscopy, cell culture.</dd></div>
               <div><dt>Findings</dt><dd>Lipophosphoglycan and 14-methylated sterols protect against SLO-mediated pore formation. Published in <em>Toxins</em> 2026; presented at two ASCB meetings.</dd></div>
-              <div><dt>Why it matters</dt><dd>Leishmaniasis affects roughly a million people each year, mostly in regions where treatment is hard to access, and the current drugs are costly and harsh on the body. Understanding how the parasite survives membrane damage may let existing therapies work at lower doses, directly reducing both cost and harm.</dd></div>
+              <div><dt>Why it matters</dt><dd>Leishmaniasis affects roughly a million people each year, mostly in regions where treatment is hard to access, and the current drugs are costly and harsh on the body. Understanding how the parasite survives membrane damage may allow existing therapies to work at lower doses, directly reducing both cost and harm.</dd></div>
             </dl>
           </div>
         </article>
@@ -213,8 +238,8 @@
             <dl class="qa">
               <div><dt>Question</dt><dd>How do lunar dust and simulants affect lung epithelial cells?</dd></div>
               <div><dt>Methods</dt><dd>Fluorescence microscopy and chemical modeling software in Dr. Jeeverajan&rsquo;s lab.</dd></div>
-              <div><dt>Findings</dt><dd>Showed how regolith irritates lung epithelial cells, and flagged ways to cut exposure.</dd></div>
-              <div><dt>Why it matters</dt><dd>Lunar dust is fine, abrasive, and clings to everything, and crews on upcoming missions will live in it for weeks at a time. Knowing how it damages lung cells, and how to limit exposure, is essential to keeping long-term exploration safe.</dd></div>
+              <div><dt>Findings</dt><dd>Demonstrated how regolith irritates lung epithelial cells, and flagged ways to cut exposure.</dd></div>
+              <div><dt>Why it matters</dt><dd>Lunar dust is fine, abrasive, and clings to everything. Crews on upcoming missions will live in it for weeks at a time. Knowing how it damages lung cells, and how to limit exposure, is essential to keeping long-term exploration safe.</dd></div>
             </dl>
           </div>
         </article>
@@ -306,7 +331,7 @@
           <div class="card-body">
             <p class="card-meta">Texas Tech &middot; Mar 2021 &ndash; May 2025</p>
             <h3>CISER Science Outreach</h3>
-            <p>Ran after-school science clubs for middle and elementary students; Extra Kilometer Award (2024).</p>
+            <p>Directed after-school science clubs for middle and elementary students; Extra Kilometer Award (2024).</p>
           </div>
         </article>
       </div>

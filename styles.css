@@ -60,17 +60,27 @@ code { font-size: 0.85em; }
 }
 .skip-link:focus { left: 12px; top: 12px; }
 
-/* ---------- scroll progress ---------- */
-.progress {
+/* ---------- scroll neuron ---------- */
+.scroll-neuron {
   position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  width: 100%;
-  z-index: 60;
-  background: var(--accent-grad);
-  transform-origin: left center;
-  transform: scaleX(0);
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 44vh;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.6;
+  display: none;
+}
+@media (min-width: 1300px) { .scroll-neuron { display: block; } }
+.np-track > * { fill: none; stroke: var(--line); stroke-width: 2.5; }
+.np-draw > * {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--p, 0));
 }
 
 /* ---------- header ---------- */
@@ -275,6 +285,7 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
   font-size: 0.78rem;
   letter-spacing: 0.04em;
 }
+.news-list li > span { min-width: 0; }
 
 /* ---------- technique tags ---------- */
 .tags { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 4px; }
@@ -431,13 +442,31 @@ html.anim .card-image img, html.anim .photo-placeholder img { transform: scale(1
   border: 1px solid var(--line);
   border-radius: 999px;
 }
-.gantt-ticks { display: flex; background: none; border: none; height: auto; }
+.gantt-ticks { position: relative; background: none; border: none; height: 18px; }
 .gantt-ticks span {
-  flex: 1;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
   font-size: 0.72rem;
   color: var(--muted);
   border-left: 1px solid var(--line);
   padding-left: 6px;
+}
+.gantt-ticks span:nth-child(1) { left: 0%; }
+.gantt-ticks span:nth-child(2) { left: 11.1%; }
+.gantt-ticks span:nth-child(3) { left: 22.2%; }
+.gantt-ticks span:nth-child(4) { left: 33.3%; }
+.gantt-ticks span:nth-child(5) { left: 44.4%; }
+.gantt-ticks span:nth-child(6) { left: 55.6%; }
+.gantt-ticks span:nth-child(7) { left: 66.7%; }
+.gantt-ticks span:nth-child(8) { left: 77.8%; }
+.gantt-ticks span:last-child {
+  left: auto;
+  right: 0;
+  border-left: none;
+  border-right: 1px solid var(--line);
+  padding-left: 0;
+  padding-right: 6px;
 }
 .bar {
   position: absolute;
@@ -502,4 +531,6 @@ html.anim .card-image img, html.anim .photo-placeholder img { transform: scale(1
   .qa > div { grid-template-columns: 1fr; gap: 2px; }
   .gantt-row { grid-template-columns: 104px 1fr; gap: 8px; }
   .gantt-label { font-size: 0.7rem; }
+  .gantt-ticks span { font-size: 0.58rem; padding-left: 3px; }
+  .gantt-ticks span:nth-child(even) { display: none; }
 }
